@@ -1,8 +1,14 @@
 const loanForm = document.getElementById('loan-form');
 
-loanForm.addEventListener('submit', calculateResults);
+loanForm.addEventListener('submit', function (e) {
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
 
-function calculateResults(e) {
+  setTimeout(calculateResults, 2000);
+  e.preventDefault();
+});
+
+function calculateResults() {
   const amount = document.getElementById('amount');
   const interest = document.getElementById('interest');
   const years = document.getElementById('years');
@@ -22,14 +28,18 @@ function calculateResults(e) {
     monthlyPayment.value = monthly.toFixed(2);
     totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     totalInterest.value = (monthly * calculatedPayments - principal).toFixed(2);
+
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('loading').style.display = 'none';
   } else {
     showError('Please check your values');
   }
-
-  e.preventDefault();
 }
 
 function showError(msg) {
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('loading').style.display = 'none';
+
   const div = document.createElement('div');
   const card = document.querySelector('.card');
   const heading = document.querySelector('.heading');
