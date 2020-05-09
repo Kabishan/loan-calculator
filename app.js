@@ -45,6 +45,8 @@ function showError(msg) {
   const heading = document.querySelector('.heading');
 
   div.className = 'alert alert-danger';
+  div.innerHTML =
+    '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ';
   div.appendChild(document.createTextNode(msg));
 
   card.insertBefore(div, heading);
